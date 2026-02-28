@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anirudh Rao</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #f5f3ef;
+            --text: #1a1916;
+            --text-muted: #7a7770;
+            --accent: #2a5c8a;
+            --accent-soft: #d4e4f0;
+            --border: #d8d5ce;
+            --tag-bg: #e8e5df;
+            --card-bg: #eeece7;
+            --transition: 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg: #141412;
+            --text: #e8e5df;
+            --text-muted: #7a7770;
+            --accent: #6aabdb;
+            --accent-soft: #1a2f40;
+            --border: #2e2c28;
+            --tag-bg: #252320;
+            --card-bg: #1c1b18;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background var(--transition), color var(--transition);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 3rem;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            transition: background var(--transition), border-color var(--transition);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-left a {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color var(--transition);
+        }
+
+        .nav-left a:hover,
+        .nav-left a.active {
+            color: var(--text);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 0.3rem 0.6rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            transition: all var(--transition);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--text-muted);
+        }
+
+        /* ── MAIN ── */
+        main {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 9rem 2rem 6rem;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            margin-bottom: 5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        .hero-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-inner {
+            display: flex;
+            align-items: flex-start;
+            gap: 3rem;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .hero-text a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .hero-text a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            font-family: 'Lora', serif;
+            font-size: clamp(2rem, 5vw, 2.75rem);
+            font-weight: 500;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-bio {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.85;
+            margin-bottom: 1.75rem;
+        }
+
+        .hero-bio strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.9rem;
+            background: var(--accent-soft);
+            border-radius: 100px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.04em;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            flex-shrink: 0;
+        }
+
+        .hero-photo {
+            flex-shrink: 0;
+            width: 175px;
+            height: 215px;
+            border-radius: 6px;
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.04em;
+            text-align: center;
+            padding: 1rem;
+            transition: background var(--transition), border-color var(--transition);
+        }
+
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ── DIVIDER ── */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 3.5rem 0;
+            opacity: 0;
+            animation: fadeUp 0.7s ease 0.2s forwards;
+        }
+
+        /* ── SECTIONS ── */
+        .section {
+            margin-bottom: 3.5rem;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        .section:nth-child(3) {
+            animation-delay: 0.25s;
+        }
+
+        .section:nth-child(4) {
+            animation-delay: 0.32s;
+        }
+
+        .section:nth-child(5) {
+            animation-delay: 0.39s;
+        }
+
+        .section:nth-child(6) {
+            animation-delay: 0.46s;
+        }
+
+        .section:nth-child(7) {
+            animation-delay: 0.53s;
+        }
+
+        .section-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section p {
+            font-size: 0.975rem;
+            color: var(--text-muted);
+            line-height: 1.85;
+        }
+
+        .section p+p {
+            margin-top: 1rem;
+        }
+
+
+        /* ── EXPERIENCE ── */
+        .exp-item {
+            display: grid;
+            grid-template-columns: 52px 1fr auto;
+            gap: 0.25rem 1rem;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border);
+            align-items: start;
+        }
+
+        .exp-item:first-child {
+            border-top: 1px solid var(--border);
+        }
+
+        .exp-logo {
+            grid-row: 1 / 3;
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--tag-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            transition: background var(--transition), border-color var(--transition);
+        }
+
+        .exp-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 5px;
+        }
+
+        /* SVG institution logos */
+        .exp-logo svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Placeholder icon */
+        .exp-logo-placeholder {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+
+        .exp-role {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .exp-role a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .exp-role a:hover {
+            text-decoration: underline;
+        }
+
+        .exp-company {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            grid-column: 2;
+        }
+
+        .exp-company a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .exp-company a:hover {
+            text-decoration: underline;
+        }
+
+        .exp-advisor {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            grid-column: 2;
+        }
+
+        .exp-advisor a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .exp-advisor a:hover {
+            text-decoration: underline;
+        }
+
+        .exp-project {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            grid-column: 2;
+        }
+
+        .exp-project a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .exp-project a:hover {
+            text-decoration: underline;
+        }
+
+        .exp-date {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+            padding-top: 0.2rem;
+        }
+
+        /* ── PUBLICATIONS CARDS ── */
+        .pub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .pub-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: border-color var(--transition), transform 0.2s ease;
+        }
+
+        .pub-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .pub-card-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--tag-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.04em;
+            transition: background var(--transition);
+        }
+
+        .pub-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pub-card-body {
+            padding: 1rem 1.1rem 1.1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .pub-year {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--accent);
+            letter-spacing: 0.08em;
+        }
+
+        .pub-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.45;
+        }
+
+        .pub-authors {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .pub-authors em {
+            color: var(--text);
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        .pub-footer {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: auto;
+            padding-top: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .pub-venue {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+        }
+
+        .pub-link {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: opacity var(--transition);
+        }
+
+        .pub-link:hover {
+            opacity: 0.7;
+        }
+
+        /* ── CONTACT ── */
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .contact-link {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            transition: all var(--transition);
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        .contact-link svg {
+            width: 13px;
+            height: 13px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer span {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav {
+                padding: 1rem 1.25rem;
+            }
+
+            main {
+                padding: 7rem 1.25rem 4rem;
+            }
+
+            footer {
+                padding: 1.5rem 1.25rem;
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            .hero-inner {
+                flex-direction: column-reverse;
+                gap: 2rem;
+            }
+
+            .hero-photo {
+                width: 100%;
+                height: 220px;
+            }
+
+            .pub-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .exp-item {
+                grid-template-columns: 44px 1fr;
+            }
+
+            .exp-date {
+                grid-column: 2;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <ul class="nav-left">
+            <li><a href="index.html" class="active">about</a></li>
+            <!-- <li><a href="research.html" class="active">research</a></li> -->
+            <li><a href="static/Anirudh Rao - CV.pdf" class="active" target="_blank">cv</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span id="themeIcon">☀️</span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <h1>Anirudh Rao</h1>
+                    <p class="hero-bio">
+                        I am a bioengineering and data science student at the
+                        <a href="https://www.iitm.ac.in" target="_blank"><strong>Indian Institute of Technology (IIT)
+                                Madras</strong></a>. I am interested in research at the
+                        intersection of <strong>synthetic biology</strong>, <strong>computational biology</strong>, and <strong>machine learning</strong>. I
+                        am driven by the belief that treating biology as an engineering discipline can unlock solutions
+                        to
+                        the world's most pressing problems.
+                    </p>
+                </div>
+                <div class="hero-photo">
+                    <img src="static/Anirudh Rao.jpg" alt="Anirudh Rao">
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider" />
+
+        <!-- EXPERIENCE -->
+        <section class="section">
+            <p class="section-label">Experience</p>
+
+            <div class="exp-item">
+                <div class="exp-logo">
+                    <img src="static/uw.png" alt="UW">
+                </div>
+                <div class="exp-role">Master's Thesis Student</div>
+                <div class="exp-date">2025 to present</div>
+                <div class="exp-company"><a href="https://www.ipd.uw.edu/" target="_blank">Institute for Protein
+                        Design</a>, <a href="https://www.washington.edu/" target="_blank">University of Washington</a>
+                </div>
+                <div class="exp-advisor">Advisor: <b><a href="https://www.bakerlab.org/" target="_blank">Dr.
+                            David Baker</a></b></div>
+                <div class="exp-project">Improving the success of <i>de novo</i> protein binders using deep learning and
+                    large-scale experimental data</div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-logo">
+                    <img src="static/stanford.avif" alt="Stanford">
+                </div>
+                <div class="exp-role"><a href="https://iusstf.org/khorana-program-for-scholars" target="_blank">Khorana
+                        Scholar</a></div>
+                <div class="exp-date">2024</div>
+                <div class="exp-company"><a href="https://www.stanford.edu/" target="_blank">Stanford University</a>
+                </div>
+                <div class="exp-advisor">Advisor: <b><a href="https://clbiology.com/index.html" target="_blank">Dr.
+                            Le Cong</a></b></div>
+                <div class="exp-project"><i>In silico</i> optimisation of ADAR2-Cas13-mediated RNA editing in
+                    mammalian cells using protein language models
+                </div>
+                <div class="exp-project">Automated analysis of killing assays to
+                    test NK cell-mediated cancer immunotherapy</div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-logo">
+                    <img src="static/iitm.png" alt="IITM">
+                </div>
+                <div class="exp-role"><a href="https://yrf.iitm.ac.in/" target="_blank">Young Research Fellow</a></div>
+                <div class="exp-date">2023 to 2024</div>
+                <div class="exp-company">IIT Madras</div>
+                <div class="exp-advisor">Advisor: <b><a href="https://ramanlab.github.io/" target="_blank">Dr.
+                            Karthik Raman</a></b></div>
+                <div class="exp-project"><i>In vitro</i> artificial neural network for
+                    universal function approximation using DNA molecules
+                </div>
+            </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-logo">
+                    <img src="static/igem-dark.png" alt="iGEM" data-light="static/igem-light.png"
+                        data-dark="static/igem-dark.png">
+                </div>
+                <div class="exp-role">Team Lead / Lab Head / Lab Member</div>
+                <div class="exp-date">2022 to 2025</div>
+                <div class="exp-company"><a href="https://cfi.iitm.ac.in/competition-teams/igem" target="_blank">iGEM
+                        IIT Madras</a></div>
+                <div class="exp-project">Co-culture of engineered bacteria and diatoms for space biomanufacturing (Gold
+                    Medal, iGEM 2024)
+                </div>
+                <div class="exp-project">Library of synthetic
+                    ribosome binding sites for <i>Lactococcus lactis</i> (Gold Medal, iGEM 2023)
+                </div>
+                <div class="exp-project">Directed evolution of yeast
+                    cytosine deaminase for enzyme prodrug cancer therapy (Scientific Contribution Award, iDEC 2022)
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-logo">
+                    <img src="static/nptel.png" alt="IITM">
+                </div>
+                <div class="exp-role">Teaching Assistant</div>
+                <div class="exp-date">2023 to 2024</div>
+                <div class="exp-company"><a href="https://nptel.ac.in/" target="_blank">National Programme on Technology
+                        Enhanced Learning (NPTEL)</a></div>
+                <div class="exp-project">TA for <a href="https://nptel.ac.in/courses/102106087" target="_blank">Dr. K.
+                        Subramaniam's course on Biochemistry</a></div>
+            </div>
+            </div>
+
+        </section>
+
+        <!-- PUBLICATIONS -->
+        <section class="section">
+            <p class="section-label">Publications</p>
+            <div class="pub-grid">
+
+                <div class="pub-card">
+                    <div class="pub-card-img">
+                        <img src="static/surfaceome.png"
+                            alt="Surfaceome CRISPR activation screening uncovers ligands regulating tumor sensitivity to NK cell killing">
+                    </div>
+                    <div class="pub-card-body">
+                        <div class="pub-year">2025 · bioRxiv</div>
+                        <div class="pub-title">Surfaceome CRISPR activation screening uncovers ligands regulating tumor
+                            sensitivity to NK cell killing</div>
+                        <div class="pub-authors">Dinesh R., Wang X., Mohammad I., Gunasekaran P., Stiklioraitis K.,
+                            Villafuerte J., <em>Rao A.</em>, Hernandez-Lopez R., Sunwoo J., &amp; Cong L.</div>
+                        <div class="pub-footer">
+                            <span class="pub-venue">Preprint</span>
+                            <a class="pub-link" href="https://doi.org/10.1101/2025.09.17.676710" target="_blank">↗
+                                view</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="section">
+            <p class="section-label">Get in touch</p>
+            <div class="contact-links">
+
+                <a class="contact-link" href="mailto:anirao2002@gmail.com">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
+                    email
+                </a>
+
+                <a class="contact-link" href="https://github.com/rao-anirudh" target="_blank">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                    </svg>
+                    github
+                </a>
+
+                <a class="contact-link" href="https://www.linkedin.com/in/anirudh-rao-95017b291/" target="_blank">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg>
+                    linkedin
+                </a>
+
+                <a class="contact-link" href="https://scholar.google.com/citations?user=7qxrFSUAAAAJ&hl=en"
+                    target="_blank">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5z" />
+                    </svg>
+                    scholar
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <span>Anirudh Rao</span>
+        <span>© 2026</span>
+    </footer>
+
+    <script>
+        const html = document.documentElement;
+        const btn = document.getElementById('themeToggle');
+        const icon = document.getElementById('themeIcon');
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme('dark');
+        btn.addEventListener('click', () => setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+        function setTheme(t) {
+            html.setAttribute('data-theme', t);
+            icon.textContent = t === 'dark' ? '🌙' : '☀️';
+
+            document.querySelectorAll('img[data-light]').forEach(img => {
+                img.src = t === 'dark' ? img.dataset.dark : img.dataset.light;
+            });
+        }
+    </script>
+</body>
+
+</html>
