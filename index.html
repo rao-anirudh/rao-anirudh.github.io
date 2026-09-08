@@ -417,6 +417,8 @@
             display: flex;
             flex-direction: column;
             transition: border-color var(--transition), transform 0.2s ease;
+            text-decoration: none;
+            color: inherit;
         }
 
         .pub-card:hover {
@@ -500,13 +502,7 @@
             font-family: 'DM Mono', monospace;
             font-size: 0.65rem;
             color: var(--accent);
-            text-decoration: none;
             letter-spacing: 0.04em;
-            transition: opacity var(--transition);
-        }
-
-        .pub-link:hover {
-            opacity: 0.7;
         }
 
         /* ── CONTACT ── */
@@ -625,7 +621,6 @@
     <nav>
         <ul class="nav-left">
             <li><a href="index.html" class="active">about</a></li>
-            <!-- <li><a href="research.html" class="active">research</a></li> -->
             <li><a href="static/Anirudh Rao - CV.pdf" class="active" target="_blank">cv</a></li>
         </ul>
         <div class="nav-right">
@@ -643,13 +638,14 @@
                 <div class="hero-text">
                     <h1>Anirudh Rao</h1>
                     <p class="hero-bio">
-                        I am a bioengineering and data science student at the
-                        <a href="https://www.iitm.ac.in" target="_blank"><strong>Indian Institute of Technology (IIT)
-                                Madras</strong></a>. I am interested in research at the
-                        intersection of <strong>synthetic biology</strong>, <strong>computational biology</strong>, and <strong>machine learning</strong>. I
-                        am driven by the belief that treating biology as an engineering discipline can unlock solutions
-                        to
-                        the world's most pressing problems.
+                        I am a first-year DPhil student in <a href="https://engbio-cdt.org/" target="_blank">Engineering
+                            Biology</a> at the <a href="https://www.ox.ac.uk/" target="_blank"><strong>University of
+                                Oxford</strong></a>. I recently graduated from the <a href="https://www.iitm.ac.in"
+                            target="_blank"><strong>Indian Institute of Technology (IIT) Madras</strong></a> with a
+                        BTech in Biological Engineering and an MTech in Data Science. I am interested in research at the
+                        intersection of <strong>synthetic biology</strong>, <strong>computational biology</strong>, and
+                        <strong>machine learning</strong>. I am driven by the belief that treating biology as an
+                        engineering discipline can unlock solutions to the world's most pressing problems.
                     </p>
                 </div>
                 <div class="hero-photo">
@@ -669,14 +665,15 @@
                     <img src="static/uw.png" alt="UW">
                 </div>
                 <div class="exp-role">Master's Thesis Student</div>
-                <div class="exp-date">2025 to present</div>
+                <div class="exp-date">2025 to 2026</div>
                 <div class="exp-company"><a href="https://www.ipd.uw.edu/" target="_blank">Institute for Protein
                         Design</a>, <a href="https://www.washington.edu/" target="_blank">University of Washington</a>
                 </div>
                 <div class="exp-advisor">Advisor: <b><a href="https://www.bakerlab.org/" target="_blank">Dr.
                             David Baker</a></b></div>
-                <div class="exp-project">Improving the success of <i>de novo</i> protein binders using deep learning and
-                    large-scale experimental data</div>
+                <div class="exp-project">Improving the success of <i>de novo</i> protein binders using contrastive
+                    learning and
+                    large-scale affinity data</div>
             </div>
 
             <div class="exp-item">
@@ -710,7 +707,6 @@
                     universal function approximation using DNA molecules
                 </div>
             </div>
-            </div>
 
             <div class="exp-item">
                 <div class="exp-logo">
@@ -743,7 +739,6 @@
                 <div class="exp-project">TA for <a href="https://nptel.ac.in/courses/102106087" target="_blank">Dr. K.
                         Subramaniam's course on Biochemistry</a></div>
             </div>
-            </div>
 
         </section>
 
@@ -752,24 +747,23 @@
             <p class="section-label">Publications</p>
             <div class="pub-grid">
 
-                <div class="pub-card">
+                <a class="pub-card" href="https://doi.org/10.1038/s41467-026-76374-x" target="_blank">
                     <div class="pub-card-img">
                         <img src="static/surfaceome.png"
                             alt="Surfaceome CRISPR activation screening uncovers ligands regulating tumor sensitivity to NK cell killing">
                     </div>
                     <div class="pub-card-body">
-                        <div class="pub-year">2025 · bioRxiv</div>
+                        <div class="pub-year">2026 · Nature Communications</div>
                         <div class="pub-title">Surfaceome CRISPR activation screening uncovers ligands regulating tumor
                             sensitivity to NK cell killing</div>
                         <div class="pub-authors">Dinesh R., Wang X., Mohammad I., Gunasekaran P., Stiklioraitis K.,
                             Villafuerte J., <em>Rao A.</em>, Hernandez-Lopez R., Sunwoo J., &amp; Cong L.</div>
-                        <div class="pub-footer">
+                        <!-- <div class="pub-footer">
                             <span class="pub-venue">Preprint</span>
-                            <a class="pub-link" href="https://doi.org/10.1101/2025.09.17.676710" target="_blank">↗
-                                view</a>
-                        </div>
+                            <span class="pub-link">↗ view</span>
+                        </div> -->
                     </div>
-                </div>
+                </a>
             </div>
         </section>
 
@@ -778,7 +772,7 @@
             <p class="section-label">Get in touch</p>
             <div class="contact-links">
 
-                <a class="contact-link" href="mailto:anirao2002@gmail.com">
+                <a class="contact-link" href="mailto:anirudh.rao@eng.ox.ac.uk">
                     <svg viewBox="0 0 24 24">
                         <path
                             d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
